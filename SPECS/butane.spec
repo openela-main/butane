@@ -10,7 +10,7 @@
 # https://github.com/coreos/butane
 %global goipath         github.com/coreos/butane
 %global gomodulesmode   GO111MODULE=on
-Version:                0.21.0
+Version:                0.23.0
 
 %gometa
 
@@ -116,6 +116,12 @@ install -p -m 0644 ./butane-windows-amd64.exe %{buildroot}%{_datadir}/butane-red
 %{_datadir}/butane-redistributable/butane-windows-amd64.exe
 
 %changelog
+* Wed Dec 11 2024 Yasmin Valim <ydesouza@redhat.com> - 0.23.0-1
+- new version
+
+* Wed Sep 25 2024 Yasmin Valim <ydesouza@redhat.com> - 0.22.0-1
+- new version
+
 * Mon Jun 10 2024 Yasmin Valim <ydesouza@redhat.com> - 0.21.0-1
 - new version
 
