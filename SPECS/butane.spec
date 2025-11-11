@@ -10,7 +10,7 @@
 # https://github.com/coreos/butane
 %global goipath         github.com/coreos/butane
 %global gomodulesmode   GO111MODULE=on
-Version:                0.23.0
+Version:                0.24.0
 
 %gometa
 
@@ -35,27 +35,29 @@ Source0:        %{gosource}
 Provides: bundled(golang(github.com/clarketm/json)) = 1.17.1
 Provides: bundled(golang(github.com/coreos/go-semver/semver)) = 0.3.1
 Provides: bundled(golang(github.com/coreos/go-systemd/v22/unit)) = 22.5.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/doc)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/merge)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/shared/errors)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/shared/parse)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/shared/validations)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/util)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_0/types)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_1/types)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_2/types)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_3/types)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_4/types)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_5_experimental/types)) = 2.17.0
-Provides: bundled(golang(github.com/coreos/ignition/v2/config/validate)) = 2.17.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/doc)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/merge)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/shared/errors)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/shared/parse)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/shared/validations)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/util)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_0/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_1/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_2/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_3/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_4/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_5/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/v3_6_experimental/types)) = 2.21.0
+Provides: bundled(golang(github.com/coreos/ignition/v2/config/validate)) = 2.21.0
 Provides: bundled(golang(github.com/coreos/vcontext/json)) = 0.0.0-20230201181013.gitd72178a18687
 Provides: bundled(golang(github.com/coreos/vcontext/path)) = 0.0.0-20230201181013.gitd72178a18687
 Provides: bundled(golang(github.com/coreos/vcontext/report)) = 0.0.0-20230201181013.gitd72178a18687
 Provides: bundled(golang(github.com/coreos/vcontext/tree)) = 0.0.0-20230201181013.gitd72178a18687
 Provides: bundled(golang(github.com/coreos/vcontext/validate)) = 0.0.0-20230201181013.gitd72178a18687
 Provides: bundled(golang(github.com/coreos/vcontext/yaml)) = 0.0.0-20230201181013.gitd72178a18687
-Provides: bundled(golang(github.com/spf13/pflag)) = 1.0.6-0.20210604193023.gitd5e0c0615ace
-Provides: bundled(golang(github.com/stretchr/testify/assert)) = 1.8.4
+Provides: bundled(golang(github.com/spf13/pflag)) = 1.0.6
+Provides: bundled(golang(github.com/stretchr/testify/assert)) = 1.10.0
+Provides: bundled(golang(github.com/stretchr/testify/assert/yaml)) = 1.10.0
 Provides: bundled(golang(github.com/vincent-petithory/dataurl)) = 1.0.0
 Provides: bundled(golang(gopkg.in/yaml.v3)) = 3.0.1
 
@@ -84,7 +86,7 @@ export GOFLAGS="-mod=vendor"
 echo "Building butane..."
 %gobuild -o ./butane internal/main.go
 
-%global gocrossbuild go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x 
+%global gocrossbuild go build -ldflags "${LDFLAGS:-} -B 0x$(head -c8 /dev/urandom|od -An -tx1|tr -d ' \\n')" -a -v -x
 
 echo "Building macOS Butane..."
 GOARCH=amd64 GOOS=darwin %gocrossbuild -o butane-darwin-amd64 internal/main.go
@@ -116,6 +118,9 @@ install -p -m 0644 ./butane-windows-amd64.exe %{buildroot}%{_datadir}/butane-red
 %{_datadir}/butane-redistributable/butane-windows-amd64.exe
 
 %changelog
+* Wed May 28 2025 Steven Presti <spresti@redhat.com> - 0.24.0-1
+- new version
+
 * Wed Dec 11 2024 Yasmin Valim <ydesouza@redhat.com> - 0.23.0-1
 - new version
 
