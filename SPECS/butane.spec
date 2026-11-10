@@ -10,7 +10,7 @@
 # https://github.com/coreos/butane
 %global goipath         github.com/coreos/butane
 %global gomodulesmode   GO111MODULE=on
-Version:                0.27.0
+Version:                0.29.0
 
 %gometa
 
@@ -147,6 +147,12 @@ install -p -m 0644 ./butane-x86_64-unknown-linux-gnu-static %{buildroot}%{_datad
 %{_datadir}/butane/butane-x86_64-unknown-linux-gnu-static
 
 %changelog
+* Wed Jul 08 2026 Yasmin de Souza <ydesouza@redhat.com> - 0.29.0-1
+- new version
+
+* Wed May 27 2026 Steven Presti <spresti@redhat.com> - 0.28.0-1
+- new version
+
 * Mon Mar 09 2026 Yasmin de Souza <ydesouza@redhat.com> - 0.27.0-1
 - new version
 
